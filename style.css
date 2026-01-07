@@ -30,6 +30,7 @@ body {
         transform 0.2s ease,
         box-shadow 0.2s ease,
         background-color 0.2s ease;
+    touch-action: manipulation;
 }
 
 .card:hover {
@@ -40,4 +41,33 @@ body {
 .card.shown {
     background-color: #ffeb3b;
     border: 3px solid #f57c00;
+}
+
+.app {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+button {
+    flex: 1;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 12px;
+    border: none;
+    background: #4f46e5;
+    color: white;
+    font-weight: 600;
+}
+
+button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
 }

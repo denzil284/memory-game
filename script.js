@@ -6,7 +6,7 @@ const checkBtn = document.getElementById('checkButton');
 checkBtn.hidden = true;
 let correctCards = [];
 let selectedCards = [];
-const allCards = ["🍎", "🍌", "🍇", "🍓", "🍍", "🥝", "🍉", "🍒"];
+const allCards = ["🟥", "🟩", "🟦", "🔴", "🟢", "🔵", "❤️", "💚", "💙"];
 let canClick = false;
 
 startBtn.onclick = startGame;
@@ -17,7 +17,7 @@ function startGame() {
     startBtn.hidden = true;
     message.textContent = 'Memory Game Started! Memorise the cards!';
     shuffleArray(allCards);
-    correctCards = allCards.slice(0, 2);
+    correctCards = allCards.slice(0, 3);
     displayCards(correctCards);
     canClick = false;
     setTimeout(() => {
@@ -67,7 +67,9 @@ function checkSelection() {
         message.textContent = 'Congratulations! You selected the correct cards!';
         resetGame();
     } else {
-        message.textContent = 'Sorry, that was incorrect. Try again!';
+        message.textContent = 'Sorry, that was incorrect. Try again! The correct cards were:';
+        displayCards(correctCards);
+        resetGame();
     }
 }
 

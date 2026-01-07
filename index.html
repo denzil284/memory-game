@@ -4,17 +4,23 @@
 <head>
     <title>Memory Game</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-    <h1>Memory Game</h1>
-    <p id="message">Press Start to Play!</p>
-    <button id="startButton">Start</button>
-    <button id="checkButton">Check</button>
-    <div id="game-board"></div>
+    <div class="app">
+        <h1>Memory Game</h1>
+        <p id="message">Press Start to Play!</p>
+
+        <div class="controls">
+            <button id="startButton">Start</button>
+            <button id="checkButton">Check</button>
+        </div>
+
+        <div id="game-board"></div>
+    </div>
+
     <script src="script.js"></script>
-
-
 </body>
 
 </html>
