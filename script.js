@@ -63,7 +63,7 @@ function selectCard(cardElement, cardValue) {
 function checkSelection() {
     canClick = false;
     checkBtn.hidden = true;
-    if (JSON.stringify(selectedCards) == JSON.stringify(correctCards)) {
+    if (JSON.stringify(selectedCards.sort()) == JSON.stringify(correctCards.sort())) {
         message.textContent = 'Congratulations! You selected the correct cards!';
         resetGame();
     } else {
