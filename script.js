@@ -2,20 +2,34 @@ const startBtn = document.getElementById('startButton');
 const board = document.getElementById('game-board');
 const message = document.getElementById('message');
 const checkBtn = document.getElementById('checkButton');
+const scoreDisplay = document.getElementById('score');
+const timerDisplay = document.getElementById('timer');
 
+timerDisplay.hidden = true;
+scoreDisplay.hidden = true
 checkBtn.hidden = true;
 let correctCards = [];
 let selectedCards = [];
 const allCards = ["🟥", "🟩", "🟦", "🔴", "🟢", "🔵", "❤️", "💚", "💙"];
 let canClick = false;
+let score = 0;
 
-startBtn.onclick = startGame;
+startBtn.onclick = gameStart;
+
+function gameStart() {
+    startGame();
+    timerDisplay.hidden = false;
+    startTimer();
+    countdownTimer();
+}
 
 
 function startGame() {
     selectedCards = [];
     startBtn.hidden = true;
+    scoreDisplay.hidden = false;
     message.textContent = 'Memory Game Started! Memorise the cards!';
+    scoreDisplay.textContent = `Score: ${score}`;
     shuffleArray(allCards);
     correctCards = allCards.slice(0, 3);
     displayCards(correctCards);
@@ -26,7 +40,7 @@ function startGame() {
         canClick = true;
         checkBtn.hidden = false;
         checkBtn.onclick = checkSelection;
-    }, 2000);
+    }, 4000);
 }
 
 function shuffleArray(array) {
@@ -65,17 +79,49 @@ function checkSelection() {
     checkBtn.hidden = true;
     if (JSON.stringify(selectedCards.sort()) == JSON.stringify(correctCards.sort())) {
         message.textContent = 'Congratulations! You selected the correct cards!';
+        score++;
         resetGame();
     } else {
         message.textContent = 'Sorry, that was incorrect. Try again! The correct cards were:';
         displayCards(correctCards);
+        score = score - 1;
         resetGame();
     }
+}
+
+function countdownTimer() {
+    let timeLeft = 60;
+    const timerInterval = setInterval(() => {
+        if (timeLeft > 0) {
+            timeLeft--;
+            timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+        }
+    }, 1000);
 }
 
 function resetGame() {
     setTimeout(() => {
         board.innerHTML = '';
         startGame();
-    }, 2000);
+    }, 1000);
+}
+
+function startTimer() {
+    setTimeout(() => {
+        exitGame();
+    }, 60000);
+}
+
+function exitGame() {
+    message.textContent = 'Game Over! Thanks for playing.';
+    scoreDisplay.textContent = `Final Score: ${score}`;
+    setTimeout(() => {
+        board.innerHTML = '';
+        startBtn.hidden = false;
+        checkBtn.hidden = true;
+        scoreDisplay.hidden = true;
+        score = 0;
+        timerDisplay.hidden = true;
+    }, 4000);
+
 }
